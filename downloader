@@ -1,0 +1,12 @@
+#!/bin/bash
+while true
+do
+ping -q -w1 -c1 google.com &>/dev/null
+
+if [ $? -eq 0 ]; then
+    python downloader.py
+sleep 3600
+else
+    echo "" 
+fi
+done
