@@ -1,0 +1,81 @@
+#!/data/data/com.termux/files/usr/bin/bash
+while true
+do
+echo -e "\033[31m"
+cat << "EOF"
+ _   _      _ _
+| | | |    | | |
+| |_| | ___| | | ___
+|  _  |/ _ \ | |/ _ \
+| | | |  __/ | | (_) |
+\_| |_/\___|_|_|\___/
+                 _                _     _ _
+     /\         (_)              | |   | | |
+    /  \   _ __  _ _ __ _   _  __| | __| | |__
+   / /\ \ | '_ \| | '__| | | |/ _` |/ _` | '_ \
+  / ____ \| | | | | |  | |_| | (_| | (_| | | | |
+ /_/    \_\_| |_|_|_|   \__,_|\__,_|\__,_|_| |_|
+
+<<=====>>WELCOM TO OUR HACKING GROUP<<=====>>
+EOF
+echo -e "\033[0m"
+echo -e "\033[32m<<=====>>YOUTUBE VIDEO DOWNLOADER<<=====>>\033[0m"
+
+get_quality () {
+  echo -e "\e[31m[*] Select video quality and format:\e[0m"
+  
+  
+  PS3="Enter choice: "
+  options=("Full resolution" "1080p" "720p" "480p" "360p" "240p" "144p" "Quit")
+  select opt in "${options[@]}"
+  do
+    case $opt in
+      "Full resolution")
+        quality="bestvideo[height>=1080]+bestaudio/best"
+        break
+        ;;
+      "1080p")
+        quality="bestvideo[height=1080]+bestaudio/best"
+        break
+        ;;
+      "720p")
+        quality="bestvideo[height=720]+bestaudio/best"
+        break
+        ;;
+      "480p")
+        quality="bestvideo[height=480]+bestaudio/best"
+        break
+        ;;
+      "360p")
+        quality="bestvideo[height=360]+bestaudio/best"
+        break
+        ;;
+      "240p")
+        quality="bestvideo[height=240]+bestaudio/best"
+        break
+        ;;
+      "144p")
+        quality="bestvideo[height=144]+bestaudio/best"
+        break
+        ;;
+      "Quit")
+        exit 1
+        ;;
+      *) echo "Invalid option $REPLY";;
+    esac
+  done
+}
+
+download_video () {
+  echo "Downloading video..."
+  yt-dlp -f $quality -o "/sdcard/Download/%(title)s.%(ext)s" $url
+  echo -e "\e[32m[+] Video Downloaded Successfully.\e[0m"
+}
+
+
+read -p "Enter the YouTube video link: " url
+
+get_quality
+
+download_video
+done
